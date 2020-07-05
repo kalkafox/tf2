@@ -3,11 +3,9 @@ FROM kalka/steamcmd
 ENV UID=1000
 ENV GID=1000
 
-RUN mkdir -p tf2
+USER steam
 
 COPY ./docker-entrypoint.sh .
-
-USER root
 
 RUN chmod +x ./docker-entrypoint.sh
 
