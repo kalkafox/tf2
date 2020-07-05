@@ -1,13 +1,20 @@
 #!/bin/bash
 #Set environment.
-SRCDS_BIN=/home/steam/tf2/srcds_run
+HOME_DIR=/home/steam
+TF2_DIR=/home/steam/tf2
+SRCDS_BIN=$TF2_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 
+
+#Update function.
 function update {
-  $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
+  $STEAMCMD_BIN +login anonymous +force_install_dir $TF2_BIN +app_update 232250 +quit
 }
 
+
+#Main function.
 function main {
+  ln -s $HOME_DIR/tf2/bin $HOME_DIR/.steam/sdk32
   if [ -z "$1" ]; then
     $SRCDS_BIN -console -game tf +sv_pure 1 +map ctf_2fort +maxplayers 24
   else
