@@ -11,9 +11,11 @@ if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
 fi
 
 function permfix {
+  echo "Changing permissions to $UID and $GID..."
   if [ $UID != 1000 ]; then
-    echo "Changing permissions to $UID and $GID..."
-    sudo chown -R $UID:$GID /home/steam/tf2
+    sudo chown -R $UID:$GID /home/steam
+  else
+    sudo chown -R steam:steam /home/steam
   fi
 }
 
