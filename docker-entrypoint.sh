@@ -7,7 +7,7 @@ STEAMCMD_BIN=/usr/games/steamcmd
 
 function permfix {
   if [ $UID != 1000 ]; then
-    chmod -R $UID:$GID /home/steam/tf2
+    chown -R $UID:$GID /home/steam/tf2
   fi
 }
 
