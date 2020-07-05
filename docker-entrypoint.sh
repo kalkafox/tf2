@@ -5,11 +5,6 @@ TF2_DIR=/home/steam/tf2
 SRCDS_BIN=$TF2_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 
-if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
-  /bin/bash
-  exit
-fi
-
 function permfix {
   echo "Changing permissions to $UID and $GID..."
   if [ $UID != 1000 ]; then
@@ -37,6 +32,10 @@ function main {
   fi
 }
 
+if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
+  /bin/bash
+  exit
+fi
 
 if [ -f "$SRCDS_BIN" ]; then
   echo "TF2 detected! Proceeding with launch."
