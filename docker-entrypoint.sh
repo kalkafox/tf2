@@ -12,6 +12,7 @@ fi
 
 function permfix {
   if [ $UID != 1000 ]; then
+    echo "Changing permissions to $UID and $GID..."
     sudo chown -R $UID:$GID /home/steam/tf2
   fi
 }
