@@ -5,10 +5,6 @@ ENV GID=1000
 
 COPY ./docker-entrypoint.sh .
 
-USER root
-
-RUN chmod +x ./docker-entrypoint.sh
-
-USER steam
+RUN sudo chmod +x ./docker-entrypoint.sh
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
