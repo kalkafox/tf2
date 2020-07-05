@@ -17,10 +17,10 @@ function main {
 
 
 if [ -f "$SRCDS_BIN" ]; then
-  echo "TF2 not detected! Starting update."
-  update
+  echo "TF2 detected! Proceeding with launch."
   main
 else
-  echo "TF2 detected! Proceeding with launch."
+  echo "TF2 not detected! Starting update."
+  update
   main
 fi
