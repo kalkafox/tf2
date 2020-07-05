@@ -7,6 +7,7 @@ STEAMCMD_BIN=/usr/games/steamcmd
 
 if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
   /bin/bash
+  exit
 fi
 
 function permfix {
