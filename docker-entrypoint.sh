@@ -16,8 +16,8 @@ function permfix {
 
 #Update function.
 function update {
-  sudo chown -R steam:steam /home/steam
-  $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
+  permfix
+  sudo $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
 }
 
 
