@@ -7,6 +7,8 @@ RUN mkdir -p tf2
 
 COPY ./docker-entrypoint.sh .
 
+USER root
+
 RUN chmod +x ./docker-entrypoint.sh
 
 USER steam
