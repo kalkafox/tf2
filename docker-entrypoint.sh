@@ -5,6 +5,11 @@ TF2_DIR=/home/steam/tf2
 SRCDS_BIN=$TF2_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 
+function permfix {
+  if [ $UID != 1000 ]; then
+    chmod -R $UID:$GID /home/steam/tf2
+  fi
+}
 
 #Update function.
 function update {
@@ -14,6 +19,7 @@ function update {
 
 #Main function.
 function main {
+  permfix
   ln -s $HOME_DIR/tf2/bin $HOME_DIR/.steam/sdk32
   if [ -z "$1" ]; then
     $SRCDS_BIN -console -game tf +sv_pure 1 +map ctf_2fort +maxplayers 24
