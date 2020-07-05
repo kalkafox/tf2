@@ -4,7 +4,7 @@ SRCDS_BIN=/home/steam/tf2/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 
 function update {
-  $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250
+  $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
 }
 
 function main {
