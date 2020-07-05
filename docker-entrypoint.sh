@@ -12,13 +12,13 @@ fi
 
 function permfix {
   if [ $UID != 1000 ]; then
-    chown -R $UID:$GID /home/steam/tf2
+    sudo chown -R $UID:$GID /home/steam/tf2
   fi
 }
 
 #Update function.
 function update {
-  chown -R steam:steam /home/steam
+  sudo chown -R steam:steam /home/steam
   $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
 }
 
