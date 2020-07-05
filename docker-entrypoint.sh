@@ -8,7 +8,7 @@ STEAMCMD_BIN=/usr/games/steamcmd
 
 #Update function.
 function update {
-  $STEAMCMD_BIN +login anonymous +force_install_dir $TF2_BIN +app_update 232250 +quit
+  $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
 }
 
 
