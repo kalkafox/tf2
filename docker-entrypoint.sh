@@ -5,6 +5,10 @@ TF2_DIR=/home/steam/tf2
 SRCDS_BIN=$TF2_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 
+if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
+  /bin/bash
+fi
+
 function permfix {
   if [ $UID != 1000 ]; then
     chown -R $UID:$GID /home/steam/tf2
