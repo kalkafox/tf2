@@ -11,6 +11,11 @@ STEAMCMD_BIN=/usr/games/steamcmd
 TIME=`date "+%Y-%m-%d %H:%M:%S"`
 LOG="[Entrypoint] [$TIME]"
 
+if [ -z $1 ]; then
+  echo "$LOG The script needs a parameter. Example: +sv_pure 1 +map ctf_2fort +maxplayers 24, etc..."
+  exit
+fi
+
 function permfix {
   echo "$LOG Changing permissions to $UID and $GID..."
   if [ $UID != 1000 ]; then
@@ -37,12 +42,7 @@ function update {
 
 #Main function.
 function main {
-  if [ -z $1 ]; then
-    echo "$LOG The script needs a parameter. Example: +sv_pure 1 +map ctf_2fort +maxplayers 24, etc..."
-    exit
-  fi
   echo "$LOG Starting main function..."
-  
   permfix
   if [ "$UPDATE" ]; then
     update
