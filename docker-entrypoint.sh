@@ -10,8 +10,9 @@ function permfix {
   if [ $UID != 1000 ]; then
     sudo usermod -u $UID steam
     sudo usermod -g $GID steam
+    sudo chown -R $UID:$GID /home/steam/
   else
-    sudo chown -R steam:steam /home/steam/tf2
+    sudo chown -R steam:steam /home/steam/
   fi
 }
 
