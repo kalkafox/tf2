@@ -14,5 +14,5 @@ before_script:
 
 build:
     script:
-      - ip addr
-      - docker pull 172.17.0.1:2375/kalka/steamcmd
+      - docker build -t srcds/steamcmd:latest .
+      - docker run --rm srcds/steamcmd:latest +quit
