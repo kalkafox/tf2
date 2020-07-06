@@ -1,6 +1,10 @@
 # This file is a template, and might need editing before it works on your project.
 image: docker
 
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+
 build:
     script:
       - docker images
