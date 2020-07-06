@@ -61,7 +61,7 @@ if [ -f "$SRCDS_BIN" ]; then
   main
 else
   echo "TF2 not detected! Starting update."
-  sudo cp -n -R /home/steam/tf2_temp /home/steam/tf2
+  copy
   sudo rm -rf /home/steam/tf2_temp
   update
   main
