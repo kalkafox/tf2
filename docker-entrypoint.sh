@@ -11,6 +11,7 @@ function permfix {
     sudo groupadd -g $GID sharedsrcds
     sudo usermod -aG $GID steam
     sudo chown -R steam:$GID /home/steam/
+    sudo chown -R steam:$GID /home/steam/.steam
   else
     sudo chown -R steam:steam /home/steam/
   fi
