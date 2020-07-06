@@ -27,7 +27,7 @@ function update {
 
 #this is to prevent .vpk's during the copying process
 function copy {
-  sudo find /home/steam/tf2_temp -type f -printf "%f\n" ! -name "*.vpk" -exec sudo cp -n -v /home/steam/tf2_temp/{} /home/steam/tf2/{}  \;
+  sudo find /home/steam/tf2_temp -type f -printf "%f\n" ! -name "*.vpk" -execdir sudo cp -n -v /home/steam/tf2_temp/{} /home/steam/tf2/{}  \;
 }
 
 
