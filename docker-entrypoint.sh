@@ -28,6 +28,9 @@ function update {
 
 #Main function.
 function main {
+  if [ "$UPDATE" ]; then
+    update
+  fi
   permfix
   sudo ln -s $HOME_DIR/tf2/bin $HOME_DIR/.steam/sdk32
   if [ -z "$1" ]; then
