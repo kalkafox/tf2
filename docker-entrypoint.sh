@@ -14,6 +14,8 @@ LOG="[Entrypoint] [$TIME]"
 if [ -z $1 ]; then
   echo "$LOG The script needs a parameter. Example: +sv_pure 1 +map ctf_2fort +maxplayers 24, etc..."
   exit
+else
+  PERMS=$1
 fi
 
 function permfix {
@@ -47,8 +49,8 @@ function main {
   if [ "$UPDATE" ]; then
     update
   fi
-  MSG="Everything looks good! Starting ${USER^^} server with $1"
-  sudo -u $USER $SRCDS_BIN -console -game tf $1
+  MSG="Everything looks good! Starting ${USER^^} server with $PERMS"
+  sudo -u $USER $SRCDS_BIN -console -game tf $PERMS
 }
 
 if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
