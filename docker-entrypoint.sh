@@ -7,6 +7,7 @@ STEAMCMD_BIN=/usr/games/steamcmd
 
 #before we do anything else, let's make sure we do this
 sudo mv /tmp/steam/tf2 /home/steam/tf2
+sudo rm -rf /tmp/steam/tf2
 
 function permfix {
   echo "Changing permissions to $UID and $GID..."
