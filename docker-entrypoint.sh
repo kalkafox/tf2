@@ -5,10 +5,6 @@ TF2_DIR=/home/steam/tf2
 SRCDS_BIN=$TF2_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 
-#before we do anything else, let's make sure we do this
-sudo mv /tmp/steam/tf2 /home/steam/tf2
-sudo rm -rf /tmp/steam/tf2
-
 function permfix {
   echo "Changing permissions to $UID and $GID..."
   if [ $UID != 1000 ]; then
@@ -47,6 +43,7 @@ if [ -f "$SRCDS_BIN" ]; then
   main
 else
   echo "TF2 not detected! Starting update."
+  sudo mv /tmp/steam/tf2 /home/steam/tf2
   update
   main
 fi
