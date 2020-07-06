@@ -6,6 +6,7 @@ HOME_DIR=/home/steam
 GAME_DIR=$HOME_DIR/$USER
 SRCDS_BIN=$GAME_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
+PERMS=$1
 
 # Logging
 TIME=`date "+%Y-%m-%d %H:%M:%S"`
