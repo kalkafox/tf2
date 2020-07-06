@@ -43,6 +43,7 @@ fi
 
 if [ -f "$SRCDS_BIN" ]; then
   echo "TF2 detected! Proceeding with launch."
+  sudo rm -rf /tmp/steam/tf2
   main
 else
   echo "TF2 not detected! Starting update."
