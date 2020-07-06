@@ -15,4 +15,3 @@ before_script:
 build:
     script:
       - docker build -t srcds/tf2:latest .
-      - docker run --rm srcds/tf2:latest +quit
