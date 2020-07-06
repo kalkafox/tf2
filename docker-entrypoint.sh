@@ -50,12 +50,11 @@ function main {
   MSG="Everything looks good! Starting ${USER^^} server with"
   if [ -z "$1" ]; then
     echo "$LOG $MSG $SERVER_PARAMS..."
-    sudo -u $USER $SRCDS_BIN -console -game tf $SERVER_PARAMS
   else
-    SERVER_PARAMS=$1
+    SERVER_PARAMS="$1"
     echo "$LOG $MSG $SERVER_PARAMS..."
-    sudo -u $USER $SRCDS_BIN -console -game tf $SERVER_PARAMS
   fi
+  sudo -u $USER $SRCDS_BIN -console -game tf $SERVER_PARAMS
 }
 
 if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
