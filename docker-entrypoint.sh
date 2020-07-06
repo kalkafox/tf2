@@ -8,11 +8,10 @@ STEAMCMD_BIN=/usr/games/steamcmd
 function permfix {
   echo "Changing permissions to $UID and $GID..."
   if [ $UID != 1000 ]; then
-    sudo usermod -u $UID steam
-    sudo groupmod -g $GID steam
-    sudo chown -R $UID:$GID /home/steam/
+    sudo useradd -m -u $UID -g $GID $USER
+    sudo chown -R $UID:$GID {$TF2_DIR,$HOME_DIR/.steam}
   else
-    sudo chown -R steam:steam /home/steam/
+    sudo chown -R steam:steam {$TF2_DIR,$HOME_DIR/.steam}
   fi
 }
 
