@@ -8,6 +8,7 @@ STEAMCMD_BIN=/usr/games/steamcmd
 function permfix {
   echo "Changing permissions to $UID and $GID..."
   if [ $UID != 1000 ]; then
+    sudo usermod -aG $GID steam
     sudo chown -R $UID:$GID /home/steam
   else
     sudo chown -R steam:steam /home/steam
@@ -26,9 +27,9 @@ function main {
   permfix
   sudo ln -s $HOME_DIR/tf2/bin $HOME_DIR/.steam/sdk32
   if [ -z "$1" ]; then
-    sudo $SRCDS_BIN -console -game tf +sv_pure 1 +map ctf_2fort +maxplayers 24
+    $SRCDS_BIN -console -game tf +sv_pure 1 +map ctf_2fort +maxplayers 24
   else
-    sudo $SRCDS_BIN -console -game tf $1
+    $SRCDS_BIN -console -game tf $1
   fi
 }
 
