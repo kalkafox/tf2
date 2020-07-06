@@ -44,13 +44,12 @@ function main {
   fi
   MSG="Everything looks good! Starting ${USER^^} server with"
   if [ -z "$1" ]; then
-    SERVER_PARAMS="+sv_pure 1 +map ctf_2fort +maxplayers 24"
-    echo "$LOG $MSG $SERVER_PARAMS..."
+    echo "$LOG $MSG +sv_pure 1 +map ctf_2fort +maxplayers 24..."
+    sudo -u $USER $SRCDS_BIN -console -game tf +sv_pure 1 +map ctf_2fort +maxplayers 24
   else
-    SERVER_PARAMS="$1"
-    echo "$LOG $MSG $SERVER_PARAMS..."
+    echo "$LOG $MSG $1..."
+    sudo -u $USER $SRCDS_BIN -console -game tf $1
   fi
-  sudo -u $USER $SRCDS_BIN -console -game tf $SERVER_PARAMS
 }
 
 if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
