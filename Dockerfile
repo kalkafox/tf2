@@ -8,4 +8,4 @@ COPY ./docker-entrypoint.sh .
 
 RUN sudo chmod +x ./docker-entrypoint.sh
 
-ENTRYPOINT ["./docker-entrypoint.sh" "$1"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
