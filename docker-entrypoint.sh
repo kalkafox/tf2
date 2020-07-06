@@ -31,9 +31,9 @@ function copy {
 
   for file in `find $TF2_TEMPDIR ! -name '*.vpk' | sed 's/^.\///'`
     do if [ -d "$file" ]; then
-      sudo mkdir -p "$TF2_DIR$file"
+      sudo mkdir -p "/$file"
     else
-      sudo cp -n "$file" "/home/steam/tf2/$file"
+      sudo cp -n "$file" "/$file"
   fi
   done
 }
