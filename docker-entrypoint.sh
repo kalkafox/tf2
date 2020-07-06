@@ -33,7 +33,7 @@ function copy {
     do if [ -d "./$file" ]; then
       sudo mkdir -p "$TF2_DIR/$file"
     else
-      sudo cp -n "$TF2_TEMPDIR/$file" "$TF2_DIR/$file"
+      sudo cp -n "./$file" "$TF2_DIR/$file"
   fi
   done
 }
