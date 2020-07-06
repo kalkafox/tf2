@@ -28,9 +28,9 @@ function main {
   permfix
   sudo ln -s $HOME_DIR/tf2/bin $HOME_DIR/.steam/sdk32
   if [ -z "$1" ]; then
-    $SRCDS_BIN -console -game tf +sv_pure 1 +map ctf_2fort +maxplayers 24
+    sudo -u $USER $SRCDS_BIN -console -game tf +sv_pure 1 +map ctf_2fort +maxplayers 24
   else
-    $SRCDS_BIN -console -game tf $1
+    sudo -u $USER $SRCDS_BIN -console -game tf $1
   fi
 }
 
