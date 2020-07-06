@@ -12,9 +12,9 @@ function permfix {
     # a hacky, but clever way of getting steam to cooperate with permissions
     sudo groupadd -g $GID shared
     sudo usermod -aG $GID steam
-    sudo chown -R $UID:$GID /home/steam
+    sudo chown -R $UID:$GID /home/steam/tf2
   else
-    sudo chown -R steam:steam /home/steam
+    sudo chown -R steam:steam /home/steam/tf2
   fi
 }
 
