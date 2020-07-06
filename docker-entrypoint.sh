@@ -50,6 +50,7 @@ fi
 if [ -f "$SRCDS_BIN" ]; then
   echo "TF2 detected! Proceeding with launch."
   main
+  copy
 else
   echo "TF2 not detected! Starting update."
   copy
