@@ -51,7 +51,7 @@ function main {
     update
   fi
   MSG="Everything looks good! Starting ${USER^^} server with $PERMS"
-  start=sudo -u $USER $SRCDS_BIN -console -game tf $PERMS
+  echo $LOG $MSG
 }
 
 if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
@@ -69,4 +69,4 @@ else
   main
 fi
 
-start
+sudo -u $USER $SRCDS_BIN -console -game tf $1
