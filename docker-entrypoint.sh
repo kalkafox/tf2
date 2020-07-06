@@ -10,7 +10,8 @@ function permfix {
   if [ $UID != 1000 ]; then
     sudo groupadd -g $GID $USER
     sudo useradd -m -u $UID -g $GID $USER
-    sudo echo $USER ALL=NOPASSWD:ALL > sudouser
+    sudo echo $USER' ALL=(ALL:ALL) NOPASSWD:ALL' > sudouser
+    sudo echo 'steam ALL=(ALL:ALL) NOPASSWD:ALL' >> sudouser
     sudo cp sudouser /etc/sudoers.d
     sudo chown -R $UID:$GID {$TF2_DIR,$HOME_DIR/.steam}
   else
