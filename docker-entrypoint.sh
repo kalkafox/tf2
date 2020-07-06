@@ -13,8 +13,10 @@ TIME=`date "+%Y-%m-%d %H:%M:%S"`
 LOG="[Entrypoint] [$TIME]"
 
 if [ -z $1 ]; then
-  echo "$LOG The script needs a parameter. Example: +sv_pure 1 +map ctf_2fort +maxplayers 24, etc..."
-  exit
+  echo "$LOG The script can have a parameter. Example: +sv_pure 1 +map ctf_2fort +maxplayers 24, etc..."
+  PERMS="+sv_pure 1 +map ctf_2fort +maxplayers 24"
+else
+  PERMS="$@"
 fi
 
 function permfix {
