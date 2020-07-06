@@ -48,7 +48,7 @@ function main {
     sudo -u $USER $SRCDS_BIN -console -game tf +sv_pure 1 +map ctf_2fort +maxplayers 24
   else
     echo "$LOG $MSG $1..."
-    sudo -u $USER $SRCDS_BIN -console -game tf $1
+    sudo -u $USER $SRCDS_BIN -console -game tf $@
   fi
 }
 
