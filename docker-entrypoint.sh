@@ -10,10 +10,10 @@ function permfix {
   if [ $UID != 1000 ]; then
     sudo groupadd -g $GID sharedsrcds
     sudo usermod -aG $GID steam
-    sudo chown -R steam:$GID /home/steam/
+    sudo chown -R steam:$GID /home/steam/tf2
     sudo chown -R steam:$GID /home/steam/.steam
   else
-    sudo chown -R steam:steam /home/steam/
+    sudo chown -R steam:steam /home/steam/tf2
   fi
 }
 
