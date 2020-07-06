@@ -3,7 +3,7 @@
 HOME_DIR=/home/steam
 TF2_DIR=/home/steam/tf2
 TF2_TEMPDIR=$HOME_DIR/tf2_temp
-SRCDS_BIN=$TF2_DIR/srcds_run
+SRCDS_BIN=$TF2_TEMPDIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 
 function permfix {
@@ -21,13 +21,13 @@ function permfix {
 #Update function.
 function update {
   permfix
-  sudo $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
+  sudo $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2_temp +app_update 232250 +quit
 }
 
 
 #this is to prevent .vpk's during the copying process
 function copy {
-  sudo find . -type f ! -name '*.vpk' | grep -r -I -l . | sudo xargs cp -t /home/steam/tf2
+  sudo find . -type f ! -name '*.vpk' | sudo xargs cp -t /home/steam/tf2
 }
 
 
