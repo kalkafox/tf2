@@ -24,6 +24,20 @@ function update {
 }
 
 
+#this is to prevent .vpk's during the copying process
+function copy {
+  set -f
+
+  for file in `find . ! -name '*.vpk' | sed 's/^.\///'`
+    do if [ -d "./$file" ]; then
+      sudo mkdir -p "$2/$file"
+    else
+      sudo cp "./$file" "$2/$file"
+  fi
+  done
+}
+
+
 #Main function.
 function main {
   permfix
