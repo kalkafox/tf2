@@ -27,15 +27,7 @@ function update {
 
 #this is to prevent .vpk's during the copying process
 function copy {
-  set -f
-
-  for file in `find $TF2_TEMPDIR ! -name '*.vpk' | sed 's/^.\///'`
-    do if [ -d "$file" ]; then
-      sudo mkdir -p "/$file"
-    else
-      sudo cp -n "$file" "/$file"
-  fi
-  done
+  find . -type f ! -name '*.vpk' | grep -r -I -l . | xargs cp -t /home/steam/tf2
 }
 
 
