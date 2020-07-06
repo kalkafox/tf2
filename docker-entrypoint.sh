@@ -27,7 +27,7 @@ function update {
 
 #this is to prevent .vpk's during the copying process
 function copy {
-  find . -type f ! -name '*.vpk' | grep -r -I -l . | xargs cp -t /home/steam/tf2
+  sudo find . -type f ! -name '*.vpk' | grep -r -I -l . | xargs cp -t /home/steam/tf2
 }
 
 
