@@ -37,7 +37,7 @@ function update {
 
 #Main function.
 function main {
-  if [ -z "$1" ]; then
+  if [ -z $1 ]; then
     echo "$LOG The script needs a parameter. Example: +sv_pure 1 +map ctf_2fort +maxplayers 24, etc..."
     exit
   fi
