@@ -52,8 +52,8 @@ function main {
     echo "$LOG $MSG $SERVER_PARAMS..."
     sudo -u $USER $SRCDS_BIN -console -game tf $SERVER_PARAMS
   else
-    echo "$LOG $MSG $SERVER_PARAMS..."
     SERVER_PARAMS=$1
+    echo "$LOG $MSG $SERVER_PARAMS..."
     sudo -u $USER $SRCDS_BIN -console -game tf $SERVER_PARAMS
   fi
 }
