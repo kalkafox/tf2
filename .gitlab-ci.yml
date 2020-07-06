@@ -14,5 +14,5 @@ before_script:
 
 build:
     script:
-      - docker build -t srcds/steamcmd:latest .
-      - docker run --rm srcds/steamcmd:latest +quit
+      - docker build -t srcds/tf2:latest .
+      - docker run --rm srcds/tf2:latest +quit
