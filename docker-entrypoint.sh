@@ -12,6 +12,8 @@ function permfix {
     sudo usermod -aG $GID steam
     sudo chown -R steam:$GID /home/steam/tf2
     sudo chown -R steam:$GID /home/steam/.steam
+    sudo chmod -R g+rw /home/steam/tf2
+    sudo chmod -R g+rw /home/steam/.steam
   else
     sudo chown -R steam:steam /home/steam/tf2
   fi
