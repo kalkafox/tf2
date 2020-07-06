@@ -1,7 +1,7 @@
 #!/bin/bash
 #Set environment.
 HOME_DIR=/home/steam
-GAME_DIR=/home/steam/$USER
+GAME_DIR=$HOME_DIR/$USER
 SRCDS_BIN=$GAME_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 
@@ -13,7 +13,8 @@ function permfix {
     sudo echo $USER' ALL=(ALL:ALL) NOPASSWD:ALL' > sudouser
     sudo echo 'steam ALL=(ALL:ALL) NOPASSWD:ALL' >> sudouser
     sudo cp sudouser /etc/sudoers.d
-    sudo chown -R $UID:$GID {$GAME_DIR,$HOME_DIR/.steam}
+    sudo find $GAME_DIR ! -user $UID -exec sudo chown -R $UID:$GID {} \;
+    sudo find $HOME_DIR/.steam ! -user $UID -exec sudo chown -R $UID:$GID {} \;
   else
     sudo chown -R steam:steam {$GAME_DIR,$HOME_DIR/.steam}
   fi
@@ -22,7 +23,7 @@ function permfix {
 #Update function.
 function update {
   permfix
-  $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
+  sudo -u $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
 }
 
 
@@ -32,7 +33,7 @@ function main {
     update
   fi
   permfix
-  sudo ln -s $HOME_DIR/tf2/bin $HOME_DIR/.steam/sdk32
+  sudo ln -s $HOME_DIR/.steam /home/$USER/.steam
   if [ -z "$1" ]; then
     sudo -u $USER $SRCDS_BIN -console -game tf +sv_pure 1 +map ctf_2fort +maxplayers 24
   else
