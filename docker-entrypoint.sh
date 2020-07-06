@@ -1,8 +1,8 @@
 #!/bin/bash
 #Set environment.
 HOME_DIR=/home/steam
-TF2_DIR=/home/steam/tf2
-SRCDS_BIN=$TF2_DIR/srcds_run
+GAME_DIR=/home/steam/$USER
+SRCDS_BIN=$GAME_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 
 function permfix {
@@ -13,9 +13,9 @@ function permfix {
     sudo echo $USER' ALL=(ALL:ALL) NOPASSWD:ALL' > sudouser
     sudo echo 'steam ALL=(ALL:ALL) NOPASSWD:ALL' >> sudouser
     sudo cp sudouser /etc/sudoers.d
-    sudo chown -R $UID:$GID {$TF2_DIR,$HOME_DIR/.steam}
+    sudo chown -R $UID:$GID {$GAME_DIR,$HOME_DIR/.steam}
   else
-    sudo chown -R steam:steam {$TF2_DIR,$HOME_DIR/.steam}
+    sudo chown -R steam:steam {$GAME_DIR,$HOME_DIR/.steam}
   fi
 }
 
