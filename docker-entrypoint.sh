@@ -30,10 +30,10 @@ function copy {
   set -f
 
   for file in `find $TF2_TEMPDIR ! -name '*.vpk' | sed 's/^.\///'`
-    do if [ -d "./$file" ]; then
-      sudo mkdir -p "$TF2_DIR/$file"
+    do if [ -d "$TF2_TEMPDIR$file" ]; then
+      sudo mkdir -p "$TF2_DIR$file"
     else
-      sudo cp -n "./$file" \s "$TF2_DIR/$file"
+      sudo cp -n "$TF2_TEMPDIR$file $TF2_DIR$file"
   fi
   done
 }
