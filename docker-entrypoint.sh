@@ -9,7 +9,7 @@ function permfix {
   echo "Changing permissions to $UID and $GID..."
   if [ $UID != 1000 ]; then
     sudo usermod -u $UID steam
-    sudo usermod -g $GID steam
+    sudo groupmod -g $GID steam
     sudo chown -R $UID:$GID /home/steam/
   else
     sudo chown -R steam:steam /home/steam/
