@@ -37,19 +37,18 @@ function update {
 
 #Main function.
 function main {
+  if [ -z "$1" ]; then
+    echo "$LOG The script needs a parameter. Example: +sv_pure 1 +map ctf_2fort +maxplayers 24, etc..."
+    exit
+  fi
   echo "$LOG Starting main function..."
+  
   permfix
   if [ "$UPDATE" ]; then
     update
   fi
-  MSG="Everything looks good! Starting ${USER^^} server with"
-  if [ -z "$1" ]; then
-    echo "$LOG $MSG +sv_pure 1 +map ctf_2fort +maxplayers 24..."
-    sudo -u $USER $SRCDS_BIN -console -game tf +sv_pure 1 +map ctf_2fort +maxplayers 24
-  else
-    echo "$LOG $MSG $1..."
-    sudo -u $USER $SRCDS_BIN -console -game tf $1
-  fi
+  MSG="Everything looks good! Starting ${USER^^} server with $1"
+  sudo -u $USER $SRCDS_BIN -console -game tf $1
 }
 
 if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
