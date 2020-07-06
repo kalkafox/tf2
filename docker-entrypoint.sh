@@ -1,9 +1,17 @@
 #!/bin/bash
 #Set environment.
+
+# Main binaries & their directories.
 HOME_DIR=/home/steam
 GAME_DIR=$HOME_DIR/$USER
 SRCDS_BIN=$GAME_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
+
+# Default server parameters.
+
+SERVER_PARAMS="+sv_pure 1 +map ctf_2fort +maxplayers 24"
+
+# Logging
 TIME=`date "+%Y-%m-%d %H:%M:%S"`
 LOG="[Entrypoint] [$TIME]"
 
@@ -39,11 +47,14 @@ function main {
     update
   fi
   permfix
-  sudo ln -s $HOME_DIR/.steam /home/$USER/.steam
+  MSG="Everything looks good! Starting ${USER^^} server with"
   if [ -z "$1" ]; then
-    sudo -u $USER $SRCDS_BIN -console -game tf +sv_pure 1 +map ctf_2fort +maxplayers 24
+    echo "$LOG $MSG $SERVER_PARAMS..."
+    sudo -u $USER $SRCDS_BIN -console -game tf $SERVER_PARAMS
   else
-    sudo -u $USER $SRCDS_BIN -console -game tf $1
+    echo "$LOG $MSG $SERVER_PARAMS..."
+    SERVER_PARAMS=$1
+    sudo -u $USER $SRCDS_BIN -console -game tf $SERVER_PARAMS
   fi
 }
 
@@ -54,10 +65,10 @@ if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
 fi
 
 if [ -f "$SRCDS_BIN" ]; then
-  echo "$LOG TF2 detected! Proceeding with launch."
+  echo "$LOG ${USER^^} detected! Proceeding with launch."
   main
 else
-  echo "$LOG TF2 not detected! Starting update."
+  echo "$LOG ${USER^^} not detected! Starting update."
   update
   main
 fi
