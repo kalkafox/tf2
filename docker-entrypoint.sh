@@ -2,6 +2,7 @@
 #Set environment.
 HOME_DIR=/home/steam
 TF2_DIR=/home/steam/tf2
+TF2_TEMPDIR=$HOME_DIR/tf2_temp
 SRCDS_BIN=$TF2_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 
@@ -28,11 +29,11 @@ function update {
 function copy {
   set -f
 
-  for file in `find . ! -name '*.vpk' | sed 's/^.\///'`
+  for file in `find $TF2_TEMPDIR ! -name '*.vpk' | sed 's/^.\///'`
     do if [ -d "./$file" ]; then
       sudo mkdir -p "$2/$file"
     else
-      sudo cp "./$file" "$2/$file"
+      sudo cp "$TF2_TEMPDIR/$file" "$TF2_TEMPDIR/$file"
   fi
   done
 }
