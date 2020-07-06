@@ -7,10 +7,6 @@ GAME_DIR=$HOME_DIR/$USER
 SRCDS_BIN=$GAME_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 
-# Default server parameters.
-
-SERVER_PARAMS="+sv_pure 1 +map ctf_2fort +maxplayers 24"
-
 # Logging
 TIME=`date "+%Y-%m-%d %H:%M:%S"`
 LOG="[Entrypoint] [$TIME]"
@@ -34,7 +30,6 @@ function permfix {
 #Update function.
 function update {
   echo "$LOG Starting update."
-  permfix
   sudo -u $USER $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
   echo "$LOG Update finished!"
 }
@@ -43,12 +38,13 @@ function update {
 #Main function.
 function main {
   echo "$LOG Starting main function..."
+  permfix
   if [ "$UPDATE" ]; then
     update
   fi
-  permfix
   MSG="Everything looks good! Starting ${USER^^} server with"
   if [ -z "$1" ]; then
+    SERVER_PARAMS="+sv_pure 1 +map ctf_2fort +maxplayers 24"
     echo "$LOG $MSG $SERVER_PARAMS..."
   else
     SERVER_PARAMS="$1"
