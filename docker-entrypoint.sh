@@ -21,7 +21,7 @@ else
   PERMS="$@"
 fi
 
-function permfix {
+permfix {
   log "Changing permissions to $UID and $GID..."
   if [ $UID != 1000 ]; then
     sudo groupadd -g $GID $USER
@@ -38,7 +38,7 @@ function permfix {
 }
 
 #Update function.
-function update {
+update() {
   log "Starting update."
   sudo -u $USER $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
   log "Update finished!"
@@ -46,7 +46,7 @@ function update {
 
 
 #Main function.
-function main {
+main() {
   log "Starting main function..."
   permfix
   if [ "$UPDATE" ]; then
