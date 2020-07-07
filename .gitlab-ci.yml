@@ -1,17 +1,29 @@
-# This file is a template, and might need editing before it works on your project.
-image: docker:19.03
+image: docker:latest
 
 variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: "/certs"
+  CI_REGISTRY_USER: "kalka"
+  CI_REGISTRY_IMAGE: "index.docker.io/kalka/tf2"
 
 services:
-  - docker:19.03-dind
+  - docker:dind
 
 before_script:
-    - docker info
+  - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin
 
+build-master:
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
+    - docker push "$CI_REGISTRY_IMAGE"
+  only:
+    - master
 
 build:
-    script:
-      - docker build -t srcds/tf2:latest .
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+  except:
+    - master
