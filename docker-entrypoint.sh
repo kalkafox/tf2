@@ -9,18 +9,20 @@ STEAMCMD_BIN=/usr/games/steamcmd
 PERMS=$@
 
 # Logging
-TIME=`date "+%Y-%m-%d %H:%M:%S"`
-LOG="[Entrypoint] [$TIME]"
+
+log() {
+  echo "[ENTRYPOINT] [$(date "+%Y-%m-%d %H:%M:%S")] $*"
+}
 
 if [ -z $1 ]; then
-  echo "$LOG The script can have a parameter. Example: +sv_pure 1 +map ctf_2fort +maxplayers 24, etc..."
+  log "The script can have a parameter. Example: +sv_pure 1 +map ctf_2fort +maxplayers 24, etc..."
   PERMS="+sv_pure 1 +map ctf_2fort +maxplayers 24"
 else
   PERMS="$@"
 fi
 
 function permfix {
-  echo "$LOG Changing permissions to $UID and $GID..."
+  log "Changing permissions to $UID and $GID..."
   if [ $UID != 1000 ]; then
     sudo groupadd -g $GID $USER
     sudo useradd -m -u $UID -g $GID $USER
@@ -29,7 +31,7 @@ function permfix {
     sudo cp sudouser /etc/sudoers.d
     sudo find $GAME_DIR ! -user $UID -exec sudo chown -R $UID:$GID {} \;
     sudo find $HOME_DIR/.steam ! -user $UID -exec sudo chown -R $UID:$GID {} \;
-    echo "$LOG Finished with permissions!"
+    log "Finished with permissions!"
   else
     sudo chown -R steam:steam {$GAME_DIR,$HOME_DIR/.steam}
   fi
@@ -37,34 +39,34 @@ function permfix {
 
 #Update function.
 function update {
-  echo "$LOG Starting update."
+  log "Starting update."
   sudo -u $USER $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
-  echo "$LOG Update finished!"
+  log "Update finished!"
 }
 
 
 #Main function.
 function main {
-  echo "$LOG Starting main function..."
+  log "Starting main function..."
   permfix
   if [ "$UPDATE" ]; then
     update
   fi
   MSG="Everything looks good! Starting ${USER^^} server with $PERMS"
-  echo $LOG $MSG
+  log $MSG
 }
 
 if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
-  echo "$LOG Tunneling to /bin/bash!"
+  log "Tunneling to /bin/bash!"
   /bin/bash
   exit
 fi
 
 if [ -f "$SRCDS_BIN" ]; then
-  echo "$LOG ${USER^^} detected! Proceeding with launch."
+  log "${USER^^} detected! Proceeding with launch."
   main
 else
-  echo "$LOG ${USER^^} not detected! Starting update."
+  log "${USER^^} not detected! Starting update."
   update
   main
 fi
