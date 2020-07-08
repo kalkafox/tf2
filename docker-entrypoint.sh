@@ -57,7 +57,7 @@ sourcemod_flag() {
       $SUDO tar -C $GAME_DIR/tf -zxvf $GAME_DIR/tf/sourcemod-1.10.0-git6490-linux.tar.gz
       $SUDO rm $GAME_DIR/tf/sourcemod-1.10.0-git6490-linux.tar.gz
     fi
-    if [ ! -d "$ADDONS_DIR/metamod"]; then
+    if [ ! -d "$ADDONS_DIR/metamod" ]; then
       $SUDO wget https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz -P $GAME_DIR/tf
       $SUDO tar -C $GAME_DIR/tf -zxvf $GAME_DIR/tf/mmsource-1.10.7-git971-linux.tar.gz
       $SUDO rm $GAME_DIR/tf/mmsource-1.10.7-git971-linux.tar.gz
