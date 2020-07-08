@@ -4,6 +4,7 @@
 # Main binaries & their directories.
 HOME_DIR=/home/steam
 GAME_DIR=$HOME_DIR/$USER
+ADDONS_DIR=$GAME_DIR/tf/addons
 SRCDS_BIN=$GAME_DIR/srcds_run
 STEAMCMD_BIN=/usr/games/steamcmd
 PERMS=$@
@@ -49,14 +50,18 @@ update() {
 
 sourcemod_flag() {
   if [ "$SOURCEMOD" ]; then
-   log "Sourcemod is flagged to be downloaded."
-   $SUDO mkdir -p $GAME_DIR/tf/addons
-   $SUDO wget https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6490-linux.tar.gz -P $GAME_DIR/tf
-   $SUDO tar -C $GAME_DIR/tf -k -zxvf $GAME_DIR/tf/sourcemod-1.10.0-git6490-linux.tar.gz
-   $SUDO rm $GAME_DIR/tf/sourcemod-1.10.0-git6490-linux.tar.gz
-   $SUDO wget https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz -P $GAME_DIR/tf
-   $SUDO tar -C $GAME_DIR/tf -k -zxvf $GAME_DIR/tf/mmsource-1.10.7-git971-linux.tar.gz
-   $SUDO rm $GAME_DIR/tf/mmsource-1.10.7-git971-linux.tar.gz
+    log "Sourcemod is flagged to be downloaded."
+    $SUDO mkdir -p $GAME_DIR/tf/addons
+    if [ ! -d "$ADDONS_DIR/sourcemod" ]; then
+      $SUDO wget https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6490-linux.tar.gz -P $GAME_DIR/tf
+      $SUDO tar -C $GAME_DIR/tf -zxvf $GAME_DIR/tf/sourcemod-1.10.0-git6490-linux.tar.gz
+      $SUDO rm $GAME_DIR/tf/sourcemod-1.10.0-git6490-linux.tar.gz
+    fi
+    if [ ! -d "$ADDONS_DIR/metamod"]; then
+      $SUDO wget https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz -P $GAME_DIR/tf
+      $SUDO tar -C $GAME_DIR/tf -zxvf $GAME_DIR/tf/mmsource-1.10.7-git971-linux.tar.gz
+      $SUDO rm $GAME_DIR/tf/mmsource-1.10.7-git971-linux.tar.gz
+    fi
    log "Sourcemod is finished downloading."
   fi
 }
