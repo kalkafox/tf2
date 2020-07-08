@@ -42,7 +42,7 @@ permfix() {
 #Update function.
 update() {
   log "Starting update."
-  $SUDO $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
+  $SUDO $STEAMCMD_BIN +login anonymous +force_install_dir $GAME_DIR +app_update 232250 +quit
   log "Update finished!"
 }
 
