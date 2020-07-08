@@ -21,7 +21,7 @@ else
   PERMS="$@"
 fi
 
-permfix {
+permfix() {
   log "Changing permissions to $UID and $GID..."
   if [ $UID != 1000 ]; then
     sudo groupadd -g $GID $USER
