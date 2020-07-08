@@ -42,6 +42,7 @@ permfix() {
 #Update function.
 update() {
   log "Starting update."
+  permfix
   $SUDO $STEAMCMD_BIN +login anonymous +force_install_dir $GAME_DIR +app_update 232250 +quit
   log "Update finished!"
 }
@@ -73,7 +74,7 @@ main() {
   log $MSG
 }
 
-if [ $1 == "/bin/bash" ]; then # tunnel into bash incase we need it
+if [ "$1" == "/bin/bash" ]; then # tunnel into bash incase we need it
   log "Tunneling to /bin/bash!"
   /bin/bash
   exit
