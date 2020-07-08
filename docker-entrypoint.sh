@@ -28,20 +28,36 @@ permfix {
     sudo useradd -m -u $UID -g $GID $USER
     sudo echo $USER' ALL=(ALL:ALL) NOPASSWD:ALL' > sudouser
     sudo echo 'steam ALL=(ALL:ALL) NOPASSWD:ALL' >> sudouser
-    sudo cp sudouser /etc/sudoers.d
+    sudo cp -v sudouser /etc/sudoers.d
     sudo find $GAME_DIR ! -user $UID -exec sudo chown -R $UID:$GID {} \;
-    sudo find $HOME_DIR/.steam ! -user $UID -exec sudo chown -R $UID:$GID {} \;
+    sudo mv /home/steam/.steam /home/$USER/.steam
+    SUDO="sudo -u $USER"
     log "Finished with permissions!"
   else
-    sudo chown -R steam:steam {$GAME_DIR,$HOME_DIR/.steam}
+    USER=steam
+    sudo find -D exec $GAME_DIR ! -user steam -exec sudo chown -c -R steam:steam {} \;
   fi
 }
 
 #Update function.
 update() {
   log "Starting update."
-  sudo -u $USER $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
+  $SUDO $STEAMCMD_BIN +login anonymous +force_install_dir /home/steam/tf2 +app_update 232250 +quit
   log "Update finished!"
+}
+
+sourcemod_flag() {
+  if [ "$SOURCEMOD" ]; then
+   log "Sourcemod is flagged to be downloaded."
+   $SUDO mkdir -p $GAME_DIR/tf/addons
+   $SUDO wget https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6490-linux.tar.gz -P $GAME_DIR/tf
+   $SUDO tar -C $GAME_DIR/tf -zxvfk $GAME_DIR/tf/sourcemod-1.10.0-git6490-linux.tar.gz
+   $SUDO rm $GAME_DIR/tf/sourcemod-1.10.0-git6490-linux.tar.gz
+   $SUDO wget https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz -P $GAME_DIR/tf
+   $SUDO tar -C $GAME_DIR/tf -zxvfk $GAME_DIR/tf/mmsource-1.10.7-git971-linux.tar.gz
+   $SUDO rm $GAME_DIR/tf/mmsource-1.10.7-git971-linux.tar.gz
+   log "Sourcemod is finished downloading."
+  fi
 }
 
 
@@ -49,6 +65,7 @@ update() {
 main() {
   log "Starting main function..."
   permfix
+  sourcemod_flag
   if [ "$UPDATE" ]; then
     update
   fi
@@ -71,4 +88,4 @@ else
   main
 fi
 
-sudo -u $USER $SRCDS_BIN -console -game tf $@
+$SUDO $SRCDS_BIN -console -game tf $@
