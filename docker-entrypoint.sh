@@ -52,10 +52,10 @@ sourcemod_flag() {
    log "Sourcemod is flagged to be downloaded."
    $SUDO mkdir -p $GAME_DIR/tf/addons
    $SUDO wget https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6490-linux.tar.gz -P $GAME_DIR/tf
-   $SUDO tar -C $GAME_DIR/tf -zxvfk $GAME_DIR/tf/sourcemod-1.10.0-git6490-linux.tar.gz
+   $SUDO tar -C $GAME_DIR/tf -k -zxvf $GAME_DIR/tf/sourcemod-1.10.0-git6490-linux.tar.gz
    $SUDO rm $GAME_DIR/tf/sourcemod-1.10.0-git6490-linux.tar.gz
    $SUDO wget https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz -P $GAME_DIR/tf
-   $SUDO tar -C $GAME_DIR/tf -zxvfk $GAME_DIR/tf/mmsource-1.10.7-git971-linux.tar.gz
+   $SUDO tar -C $GAME_DIR/tf -k -zxvf $GAME_DIR/tf/mmsource-1.10.7-git971-linux.tar.gz
    $SUDO rm $GAME_DIR/tf/mmsource-1.10.7-git971-linux.tar.gz
    log "Sourcemod is finished downloading."
   fi
