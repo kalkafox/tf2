@@ -43,7 +43,7 @@ permfix() {
 update() {
   log "Starting update."
   permfix
-  $SUDO $STEAMCMD_BIN +login anonymous +force_install_dir $GAME_DIR +app_update 232250 +quit
+  $SUDO $STEAMCMD_BIN +login anonymous +force_install_dir $GAME_DIR +app_update 232250 validate +quit
   log "Update finished!"
 }
 
